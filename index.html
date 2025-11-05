@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculator salariu România – Brut ↔ Net</title>
+  <meta name="description" content="Calculator salariu România: transformă rapid salariul brut în net și invers. Contribuții CAS, CASS, impozit pe venit. Configurabil."/>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header>
+    <h1>Calculator salariu România – Brut ↔ Net</h1>
+    <p class="tagline">Rapid, simplu, configurabil. <span id="configYear"></span></p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Date de intrare</h2>
+      <div class="grid">
+        <label>Tip calcul
+          <select id="calcType">
+            <option value="gross_to_net">Brut ➜ Net</option>
+            <option value="net_to_gross">Net ➜ Brut</option>
+          </select>
+        </label>
+
+        <label>Valoare (lei)
+          <input id="amount" type="number" step="0.01" min="0" placeholder="ex: 7000" />
+        </label>
+
+        <label>Deducere personală (lei)
+          <input id="personalDeduction" type="number" step="1" min="0" value="0" />
+        </label>
+
+        <label>An fiscal (din config)
+          <select id="year"></select>
+        </label>
+      </div>
+
+      <div class="grid">
+        <label>CAS (%)
+          <input id="cas" type="number" step="0.01" min="0" />
+        </label>
+        <label>CASS (%)
+          <input id="cass" type="number" step="0.01" min="0" />
+        </label>
+        <label>Impozit venit (%)
+          <input id="tax" type="number" step="0.01" min="0" />
+        </label>
+        <label>Contribuție angajator CAM (%)
+          <input id="employer" type="number" step="0.01" min="0" />
+        </label>
+      </div>
+
+      <button id="calcBtn">Calculează</button>
+      <p class="hint">Notă: Reglementările fiscale se pot schimba. Verifică și actualizează <code>config.json</code> când este cazul.</p>
+    </section>
+
+    <section class="card">
+      <h2>Rezultat</h2>
+      <div id="results" class="results">
+        <div class="row"><span>Salariu brut:</span><strong id="outGross">—</strong></div>
+        <div class="row"><span>CAS angajat:</span><strong id="outCAS">—</strong></div>
+        <div class="row"><span>CASS angajat:</span><strong id="outCASS">—</strong></div>
+        <div class="row"><span>Bază impozabilă:</span><strong id="outBase">—</strong></div>
+        <div class="row"><span>Impozit pe venit:</span><strong id="outTax">—</strong></div>
+        <div class="row highlight"><span>Salariu net:</span><strong id="outNet">—</strong></div>
+        <div class="row"><span>CAM angajator:</span><strong id="outCAM">—</strong></div>
+        <div class="row"><span>Cost total angajator:</span><strong id="outEmployerCost">—</strong></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Întrebări frecvente</h2>
+      <details>
+        <summary>De ce am un câmp de „Deducere personală” manuală?</summary>
+        <p>Deducerea personală în România depinde de mai mulți factori (venit, persoane în întreținere etc.) și formula se poate modifica. Pentru a păstra calculatorul corect și simplu, poți introduce aici suma aferentă deducerii tale personale. Lasă 0 dacă nu se aplică.</p>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="yearNow"></span> New Folder Solutions. Creat pentru informare, fără garanții. Nu reprezintă consultanță fiscală.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
